@@ -10,5 +10,7 @@ pipeline {
     stage('Compile name.dart') {
       steps {
         sh 'dart compile exe name.dart'
+      }
+    }
   }
 }
