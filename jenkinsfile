@@ -2,29 +2,28 @@ pipeline {
   agent any
   
   stages {
-    stage('Checkout') {
-      steps {
-        checkout scm
-      }
-    }
-    
     stage('Compile hello.dart') {
-      when {
-        branch 'main'
-      }
       steps {
-        sh 'dart compile exe bin/hello.dart'
+        checkout([$class: 'GitSCM', 
+                  branches: [[name: '*/main']], 
+                  doGenerateSubmoduleConfigurations: false, 
+                  extensions: [], 
+                  submoduleCfg: [], 
+                  userRemoteConfigs: [[url: 'https://github.com/prithvirajpowar/dart.git']]])
+        sh 'dart compile exe hello.dart'
       }
     }
     
     stage('Compile name.dart') {
-      when {
-        branch 'dart'
-      }
       steps {
-        sh 'dart compile exe bin/name.dart'
+        checkout([$class: 'GitSCM', 
+                  branches: [[name: '*/sub']], 
+                  doGenerateSubmoduleConfigurations: false, 
+                  extensions: [], 
+                  submoduleCfg: [], 
+                  userRemoteConfigs: [[url: 'https://github.com/prithvirajpowar/dart.git']]])
+        sh 'dart compile exe name.dart'
       }
     }
   }
 }
-
