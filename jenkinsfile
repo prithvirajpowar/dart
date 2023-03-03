@@ -4,26 +4,11 @@ pipeline {
   stages {
     stage('Compile hello.dart') {
       steps {
-        checkout([$class: 'GitSCM', 
-                  branches: [[name: '*/main']], 
-                  doGenerateSubmoduleConfigurations: false, 
-                  extensions: [], 
-                  submoduleCfg: [], 
-                  userRemoteConfigs: [[url: 'https://github.com/prithvirajpowar/dart.git']]])
         sh 'dart compile exe hello.dart'
       }
     }
-    
     stage('Compile name.dart') {
       steps {
-        checkout([$class: 'GitSCM', 
-                  branches: [[name: '*/sub']], 
-                  doGenerateSubmoduleConfigurations: false, 
-                  extensions: [], 
-                  submoduleCfg: [], 
-                  userRemoteConfigs: [[url: 'https://github.com/prithvirajpowar/dart.git']]])
         sh 'dart compile exe name.dart'
-      }
-    }
   }
 }
