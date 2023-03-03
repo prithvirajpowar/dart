@@ -1,17 +1,48 @@
 pipeline {
   agent any
-  
+
   stages {
-    stage('Checkout') {
+    stage('Clone repository') {
       steps {
-        checkout scm
+        git branch: 'main', url: 'https://github.com/prithvirajpowar/dart.git'
       }
     }
-    
-    stage('Build') {
+
+    stage('Build hello.dart') {
+      when {
+        branch 'main'
+      }
       steps {
-        sh 'dart hello.dart'
-        sh 'dart name.dart'
+        sh 'dart2native hello.dart -o hello'
+      }
+    }
+
+    stage('Build name.dart') {
+      when {
+        branch 'dart'
+      }
+      steps {
+        sh 'dart2native name.dart -o name'
+      }
+    }
+
+    stage('Test hello.dart') {
+      when {
+        branch 'main'
+      }
+      steps {
+        sh './hello'
+        // Add tests for hello.dart here
+      }
+    }
+
+    stage('Test name.dart') {
+      when {
+        branch 'dart'
+      }
+      steps {
+        sh './name'
+        // Add tests for name.dart here
       }
     }
   }
