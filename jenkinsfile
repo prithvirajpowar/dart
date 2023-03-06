@@ -2,14 +2,20 @@ pipeline {
   agent any
   
   stages {
-    stage('Compile hello.dart') {
+    stage('Checkout') {
       steps {
-        sh 'dart compile exe hello.dart'
+        checkout scm
       }
     }
-    stage('Compile name.dart') {
+    
+    stage('Build') {
       steps {
-        sh 'dart compile exe name.dart'
+        sh 'dart hello.dart'
+      }
+    }
+    stage('Build') {
+      steps {
+        sh 'dart name.dart'
       }
     }
   }
