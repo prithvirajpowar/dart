@@ -13,10 +13,5 @@ pipeline {
         sh 'dart hello.dart'
       }
     }
-    stage('Build') {
-      steps {
-        sh 'dart name.dart'
-      }
-    }
   }
 }
