@@ -12,6 +12,9 @@ pipeline {
       steps {
         sh 'dart hello.dart'
       }
+      {
+        sh 'dart name.dart'
+      }
     }
   }
 }
