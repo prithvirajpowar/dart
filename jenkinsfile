@@ -8,23 +8,10 @@ pipeline {
       }
     }
     
-    stage('Compile hello.dart') {
-      when {
-        branch 'main'
-      }
+    stage('Build') {
       steps {
-        sh 'dart compile exe bin/hello.dart'
-      }
-    }
-    
-    stage('Compile name.dart') {
-      when {
-        branch 'dart'
-      }
-      steps {
-        sh 'dart compile exe bin/name.dart'
+        sh 'dart hello.dart'
       }
     }
   }
 }
-
