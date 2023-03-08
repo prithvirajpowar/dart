@@ -8,14 +8,9 @@ pipeline {
       }
     }
     
-    stage('Build_1') {
+    stage('Build') {
       steps {
         sh 'dart hello.dart'
-      }
-    }
-     stage('Build_2') {
-      steps {
-        sh 'dart name.dart'
       }
     }
   }
